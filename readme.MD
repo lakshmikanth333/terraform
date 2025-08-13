@@ -40,24 +40,7 @@ Here you will find examples ranging from basic EC2 and S3 setup to advanced **VP
 - Writing **security group rules** and using **open-source modules**  
 
 
----
 
-## Repository Structure
-
-├── main.tf # Main Terraform configuration
-├── variables.tf # Input variables
-├── outputs.tf # Output values
-├── modules/ # Reusable modules (EC2, VPC, SG, Bastion)
-├── envs/ # Environment-specific variable files
-│ ├── dev.tfvars
-│ └── prod.tfvars
-├── provisioners/ # Example scripts and remote-exec
-├── README.md # Project documentation
-└── diagrams/ # Architecture diagrams and images
-
-yaml
-Copy
-Edit
 
 ---
 
