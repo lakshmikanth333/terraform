@@ -20,7 +20,6 @@ Here you will find examples ranging from basic EC2 and S3 setup to advanced **VP
 - Using **variables, data types, conditions, loops**, and **count-based resources**  
 - Outputs for resources like EC2 public IP and S3 bucket names  
 
-![Terraform Basics](https://via.placeholder.com/600x300?text=Terraform+Basics+Diagram)
 
 ---
 
@@ -30,7 +29,6 @@ Here you will find examples ranging from basic EC2 and S3 setup to advanced **VP
 - Understanding **Terraform state**, **remote state** with S3 and DynamoDB  
 - Loops and conditional resource creation  
 
-![Terraform State](https://via.placeholder.com/600x300?text=Terraform+State+Diagram)
 
 ---
 
@@ -41,7 +39,6 @@ Here you will find examples ranging from basic EC2 and S3 setup to advanced **VP
 - **SSM Parameter Store** for secrets and configurations  
 - Writing **security group rules** and using **open-source modules**  
 
-![Advanced Modules](https://via.placeholder.com/600x300?text=Advanced+Terraform+Modules)
 
 ---
 
