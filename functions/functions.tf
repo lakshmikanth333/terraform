@@ -1,5 +1,4 @@
-
-===== join() =====
+# ===== join() =====
 variable "servers" {
   default = ["prd", "dev", "stage"]
 }
@@ -7,24 +6,15 @@ variable "servers" {
 output "joined_servers" {
   value = join(".", var.servers)
 }
+# Output: "prd.dev.stage"
 
-# Output:
-# joined_servers = "prd.dev.stage"
-
-===== length() =====
-
-variable "servers" {
-  default = ["prd", "dev", "stage"]
-}
-
+# ===== length() =====
 output "servers_count" {
   value = length(var.servers)
 }
+# Output: 3
 
-# Output:
-# servers_count = 3
-
-===== lookup() =====
+# ===== lookup() =====
 variable "zones" {
   default = {
     first  = "us-east-1a"
@@ -36,23 +26,23 @@ variable "zones" {
 output "zone_lookup" {
   value = lookup(var.zones, "second", "us-east-1d")
 }
+# Output: "us-east-1b"
 
-# Output:
-# zone_lookup = "us-east-1b"
+# ===== format() =====
+variable "num_servers" {
+  default = 30
+}
 
-===== format() =====
 output "formatted_message" {
   value = format(
     "There are %d servers running in our %s data center",
-    30,
+    var.num_servers,
     "Etrade"
   )
 }
+# Output: "There are 30 servers running in our Etrade data center"
 
-# Output:
-# formatted_message = "There are 30 servers running in our Etrade data center"
-
-===== upper() =====
+# ===== upper() =====
 variable "cases" {
   default = "web application"
 }
@@ -60,39 +50,30 @@ variable "cases" {
 output "upper_case" {
   value = upper(var.cases)
 }
+# Output: "WEB APPLICATION"
 
-# Output:
-# upper_case = "WEB APPLICATION"
-
-===== file() =====
+# ===== file() =====
+# Make sure test.txt exists in the same folder as this Terraform file
 output "file_content" {
   value = file("${path.module}/test.txt")
 }
+# Output: contents of test.txt
 
-# Output:
-# file_content = "<contents of test.txt>"
-
-===== split() =====
+# ===== split() =====
 output "cloud_providers" {
   value = split(" ", "aws gcp azure")
 }
+# Output: ["aws", "gcp", "azure"]
 
-# Output:
-# cloud_providers = [
-#   "aws",
-#   "gcp",
-#   "azure",
-# ]
-
-===== merge() =====
-variable "env" {
+# ===== merge() =====
+variable "env_map" {
   default = {
     env-1 = "prd"
     env-3 = "stage"
   }
 }
 
-variable "appl" {
+variable "appl_map" {
   default = {
     appl-1 = "web"
     appl-2 = "app"
@@ -100,11 +81,10 @@ variable "appl" {
 }
 
 output "merging" {
-  value = merge(var.appl, var.env)
+  value = merge(var.appl_map, var.env_map)
 }
-
 # Output:
-# merging = {
+# {
 #   appl-1 = "web"
 #   appl-2 = "app"
 #   env-1  = "prd"
