@@ -1,20 +1,23 @@
-# ===== join() =====
+# ==== join() example ====
 variable "servers" {
   default = ["prd", "dev", "stage"]
 }
 
+# Just joining with dots instead of commas
 output "joined_servers" {
   value = join(".", var.servers)
 }
-# Output: "prd.dev.stage"
+# expected: prd.dev.stage
 
-# ===== length() =====
+
+# ==== length() ====
 output "servers_count" {
   value = length(var.servers)
 }
-# Output: 3
+# count should be 3
 
-# ===== lookup() =====
+
+# ==== lookup() ====
 variable "zones" {
   default = {
     first  = "us-east-1a"
@@ -24,25 +27,27 @@ variable "zones" {
 }
 
 output "zone_lookup" {
-  value = lookup(var.zones, "second", "us-east-1d")
+  value = lookup(var.zones, "second", "us-east-1d") # default fallback is 1d if key missing
 }
-# Output: "us-east-1b"
+# should print us-east-1b
 
-# ===== format() =====
+
+# ==== format() ====
 variable "num_servers" {
   default = 30
 }
 
 output "formatted_message" {
   value = format(
-    "There are %d servers running in our %s data center",
+    "We have %d servers in %s DC",
     var.num_servers,
     "Etrade"
   )
 }
-# Output: "There are 30 servers running in our Etrade data center"
+# sample output: We have 30 servers in Etrade DC
 
-# ===== upper() =====
+
+# ==== upper() ====
 variable "cases" {
   default = "web application"
 }
@@ -50,22 +55,24 @@ variable "cases" {
 output "upper_case" {
   value = upper(var.cases)
 }
-# Output: "WEB APPLICATION"
+# output: WEB APPLICATION
 
-# ===== file() =====
-# Make sure test.txt exists in the same folder as this Terraform file
+
+# ==== file() ====
+# Make sure test.txt is in same dir as .tf files or this will fail
 output "file_content" {
   value = file("${path.module}/test.txt")
 }
-# Output: contents of test.txt
 
-# ===== split() =====
+
+# ==== split() ====
 output "cloud_providers" {
   value = split(" ", "aws gcp azure")
 }
-# Output: ["aws", "gcp", "azure"]
+# expected: ["aws", "gcp", "azure"]
 
-# ===== merge() =====
+
+# ==== merge() ====
 variable "env_map" {
   default = {
     env-1 = "prd"
@@ -83,10 +90,8 @@ variable "appl_map" {
 output "merging" {
   value = merge(var.appl_map, var.env_map)
 }
-# Output:
-# {
-#   appl-1 = "web"
-#   appl-2 = "app"
-#   env-1  = "prd"
-#   env-3  = "stage"
-# }
+# final output:
+# appl-1 = web
+# appl-2 = app
+# env-1  = prd
+# env-3  = stage
